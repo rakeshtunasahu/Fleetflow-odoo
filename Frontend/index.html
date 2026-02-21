@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FleetFlow</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+  transition: opacity 0.5s ease;
+}
+
+.fade-out {
+  opacity: 0;
+}
+</style>
+</head>
+
+<body class="bg-gradient-to-b from-[#dfeae2] via-[#e8f2ec] to-[#f4f7f5]">
+
+<!-- ================= LANDING PAGE ================= -->
+<div id="landingPage">
+
+  <!-- Hero -->
+  <div class="max-w-[1400px] mx-auto mt-10 rounded-3xl overflow-hidden shadow-2xl">
+
+    <div class="relative h-[520px] bg-cover bg-center"
+      style="background-image: url('https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2070&auto=format&fit=crop');">
+
+      <div class="absolute inset-0 bg-black/50"></div>
+<!-- LOGIN MODEL -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <div class="bg-white rounded-3xl p-10 w-[400px] shadow-2xl relative">
+
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+      ✕
+    </button>
+
+    <h2 class="text-2xl font-semibold mb-6 text-center">Login to FleetFlow</h2>
+
+    <form onsubmit="handleLogin(event)" class="space-y-5">
+
+      <input type="email" id="loginEmail" placeholder="Email"
+        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black outline-none">
+
+      <input type="password" id="loginPassword" placeholder="Password"
+        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black outline-none">
+
+      <button type="submit"
+        class="w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition">
+        Login
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+<!-- MODERN SIGNUP MODAL -->
+<div id="signupModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+  <div class="w-[950px] h-[600px] bg-[#0f1f3d] rounded-3xl shadow-2xl overflow-hidden flex relative">
+
+    <!-- CLOSE BUTTON -->
+    <button onclick="closeSignup()"
+      class="absolute top-5 right-6 text-white text-2xl opacity-70 hover:opacity-100">
+      ✕
+    </button>
+
+    <!-- LEFT SIDE (FORM) -->
+    <div class="w-1/2 p-14 text-white">
+
+      <h2 class="text-5xl font-semibold mb-12">Registration</h2>
+
+      <form onsubmit="register(event)" class="space-y-10">
+
+        <div>
+          <label class="text-gray-400">Username</label>
+          <input type="text" id="signupUsername"
+            class="w-full bg-transparent border-b border-blue-400 py-2 focus:outline-none focus:border-blue-300">
+        </div>
+
+        <div>
+          <label class="text-gray-400">Email</label>
+          <input type="email" id="signupEmail"
+            class="w-full bg-transparent border-b border-blue-400 py-2 focus:outline-none focus:border-blue-300">
+        </div>
+
+        <div>
+          <label class="text-gray-400">Password</label>
+          <input type="password" id="signupPassword"
+            class="w-full bg-transparent border-b border-blue-400 py-2 focus:outline-none focus:border-blue-300">
+        </div>
+
+        <button
+          class="w-full mt-6 bg-blue-600 hover:bg-blue-700 py-3 rounded-xl transition shadow-lg">
+          Registration
+        </button>
+
+      </form>
+
+      <p class="mt-6 text-gray-400">
+        Already have an account?
+        <span onclick="goToLogin()"
+  class="text-blue-400 cursor-pointer hover:underline">
+  Login
+</span>
+      </p>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="w-1/2 bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-center p-10">
+      <h2 class="text-4xl font-bold leading-snug">
+        Create your FleetFlow Account
+      </h2>
+    </div>
+
+  </div>
+</div>
+      <!-- Navbar -->
+      <div class="absolute top-0 left-0 right-0 flex justify-between items-center px-12 py-8 text-white z-20">
+  
+  <!-- LEFT SIDE -->
+  <h1 class="text-2xl font-semibold tracking-wide">FleetFlow</h1>
+
+  <!-- RIGHT SIDE BUTTONS -->
+  <div class="flex items-center space-x-6">
+
+    <button onclick="goToLogin()"
+      class="px-6 py-2 rounded-full border border-white/40 backdrop-blur-md hover:bg-white/20 transition">
+      Login
+    </button>
+
+    <button onclick="openSignup()"
+      class="px-7 py-2 rounded-full bg-white text-black hover:bg-gray-200 transition shadow-lg">
+      Sign Up →
+    </button>
+
+  </div>
+
+</div>
+
+      <!-- Hero Content -->
+      <div class="absolute inset-0 flex flex-col justify-center px-20 text-white z-10">
+
+        <p class="mb-4 text-sm tracking-widest opacity-80 uppercase">
+          Intelligent Logistics Platform
+        </p>
+
+        <h2 class="text-6xl font-light leading-tight max-w-3xl">
+          Central Distribution <br>
+          <span class="font-semibold">Management System</span>
+        </h2>
+
+        <p class="mt-6 max-w-xl text-lg opacity-90">
+          Optimize fleet lifecycle, automate dispatch workflows, monitor driver safety
+          and unlock real-time financial intelligence.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Features Section -->
+  <div class="max-w-[1300px] mx-auto mt-20 px-6">
+
+    <div class="grid md:grid-cols-3 gap-12">
+
+      <div class="bg-white/70 backdrop-blur-lg rounded-3xl p-10 shadow-xl hover:shadow-2xl transition duration-500 hover:-translate-y-2">
+        <div class="text-4xl mb-6">🚚</div>
+        <h3 class="text-2xl font-semibold mb-4">Real-Time Tracking</h3>
+        <p class="text-gray-600 leading-relaxed">
+          Monitor every vehicle movement with live updates and predictive maintenance alerts.
+        </p>
+      </div>
+
+      <div class="bg-white/70 backdrop-blur-lg rounded-3xl p-10 shadow-xl hover:shadow-2xl transition duration-500 hover:-translate-y-2">
+        <div class="text-4xl mb-6">📊</div>
+        <h3 class="text-2xl font-semibold mb-4">Advanced Analytics</h3>
+        <p class="text-gray-600 leading-relaxed">
+          Visual dashboards delivering performance metrics and operational insights.
+        </p>
+      </div>
+
+      <div class="bg-white/70 backdrop-blur-lg rounded-3xl p-10 shadow-xl hover:shadow-2xl transition duration-500 hover:-translate-y-2">
+        <div class="text-4xl mb-6">⚡</div>
+        <h3 class="text-2xl font-semibold mb-4">Smart Dispatch</h3>
+        <p class="text-gray-600 leading-relaxed">
+          AI-powered routing that reduces delivery time and optimizes fuel usage.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Stats Section -->
+  <div class="max-w-[1100px] mx-auto mt-28 text-center">
+
+    <h2 class="text-4xl font-light mb-16">
+      Powering Modern Logistics Enterprises
+    </h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-3xl font-semibold">
+
+      <div>
+        <p>150+</p>
+        <p class="text-gray-500 text-base font-normal mt-2">Enterprise Clients</p>
+      </div>
+
+      <div>
+        <p>8K+</p>
+        <p class="text-gray-500 text-base font-normal mt-2">Active Vehicles</p>
+      </div>
+
+      <div>
+        <p>98%</p>
+        <p class="text-gray-500 text-base font-normal mt-2">On-Time Rate</p>
+      </div>
+
+      <div>
+        <p>$3.2M</p>
+        <p class="text-gray-500 text-base font-normal mt-2">Cost Saved</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= MAIN DASHBOARD ================= -->
+<div id="dashboardPage" class="hidden min-h-screen bg-[#0f172a] text-white flex">
+
+  <!-- SIDEBAR -->
+  <div class="w-[250px] bg-[#0b1220] p-6 flex flex-col space-y-6">
+
+    <h1 class="text-2xl font-bold mb-6">FleetFlow</h1>
+
+    <nav class="space-y-4 text-gray-400">
+      <p class="hover:text-white cursor-pointer">Dashboard</p>
+      <p class="hover:text-white cursor-pointer">Vehicle Registry</p>
+      <p class="hover:text-white cursor-pointer">Trip Dispatcher</p>
+      <p class="hover:text-white cursor-pointer">Maintenance</p>
+      <p class="hover:text-white cursor-pointer">Trip & Expense</p>
+      <p class="hover:text-white cursor-pointer">Performance</p>
+      <p class="hover:text-white cursor-pointer">Analytics</p>
+    </nav>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="flex-1 p-10">
+
+    <!-- TOP BAR -->
+    <div class="flex justify-between items-center mb-8">
+
+      <input type="text" placeholder="Search..."
+        class="px-4 py-2 w-[350px] rounded-lg bg-[#1e293b] outline-none">
+
+      <div class="space-x-4">
+        <button class="px-5 py-2 bg-blue-600 rounded-lg hover:bg-blue-700">New Trip</button>
+        <button class="px-5 py-2 bg-indigo-600 rounded-lg hover:bg-indigo-700">New Vehicle</button>
+      </div>
+
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="grid grid-cols-3 gap-6 mb-10">
+
+      <div class="bg-[#1e293b] p-6 rounded-2xl">
+        <p class="text-gray-400">Active Fleet</p>
+        <h2 id="activeFleet" class="text-3xl font-bold mt-2">0</h2>
+      </div>
+
+      <div class="bg-[#1e293b] p-6 rounded-2xl">
+        <p class="text-gray-400">Maintenance Alerts</p>
+        <h2 id="maintenanceCount" class="text-3xl font-bold mt-2">0</h2>
+      </div>
+
+      <div class="bg-[#1e293b] p-6 rounded-2xl">
+        <p class="text-gray-400">Pending Cargo</p>
+        <h2 id="pendingCargo" class="text-3xl font-bold mt-2">0</h2>
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="bg-[#1e293b] rounded-2xl overflow-hidden">
+
+      <table class="w-full text-left">
+
+        <thead class="bg-[#0f172a] text-gray-400">
+          <tr>
+            <th class="p-4">Trip</th>
+            <th class="p-4">Vehicle</th>
+            <th class="p-4">Driver</th>
+            <th class="p-4">Status</th>
+          </tr>
+        </thead>
+
+        <tbody id="tripTableBody">
+
+          <!-- Backend data inject hoga yaha -->
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+<script>
+
+function openLogin() {
+  document.getElementById("loginModal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("loginModal").classList.add("hidden");
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  let users = JSON.parse(localStorage.getItem("fleetUsers")) || [];
+
+  const validUser = users.find(user =>
+      user.email === email && user.password === password
+  );
+
+  if(validUser){
+
+    localStorage.setItem("loggedIn", "true");
+
+    document.getElementById("loginModal").classList.add("hidden");
+    document.getElementById("landingPage").classList.add("hidden");
+    document.getElementById("dashboardPage").classList.remove("hidden");
+
+  } else {
+    alert("Invalid Credentials");
+  }
+}
+
+function logout() {
+  localStorage.removeItem("loggedIn");
+  document.getElementById("dashboardPage").classList.add("hidden");
+  document.getElementById("landingPage").classList.remove("hidden");
+}
+
+// Auto login if already logged in
+window.onload = function() {
+  if(localStorage.getItem("loggedIn") === "true") {
+    document.getElementById("landingPage").classList.add("hidden");
+    document.getElementById("dashboardPage").classList.remove("hidden");
+  }
+}
+
+</script>
+<script>
+function goToLogin() {
+  document.body.style.transition = "opacity 0.5s ease";
+  document.body.style.opacity = "0";
+
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 500);
+}
+</script>
+<script>
+function openSignup(){
+  document.getElementById("signupModal").classList.remove("hidden");
+}
+
+function closeSignup(){
+  document.getElementById("signupModal").classList.add("hidden");
+}
+
+function register(e){
+  e.preventDefault();
+
+  const user = {
+    username: document.getElementById("signupUsername").value,
+    email: document.getElementById("signupEmail").value,
+    password: document.getElementById("signupPassword").value
+  };
+
+  localStorage.setItem("fleetUser", JSON.stringify(user));
+
+  alert("Account Created Successfully!");
+  closeSignup();
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - FleetFlow</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.5s ease;
+}
+
+/* Smooth fade animation */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden">
+
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center"
+style="background-image:url('https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80&w=2070&auto=format&fit=crop');">
+</div>
+
+<!-- Dark Overlay -->
+<div class="absolute inset-0 bg-gradient-to-r from-black/70 to-blue-900/70"></div>
+
+<!-- Login Card -->
+<div class="relative z-10 bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden w-[1050px] flex fade-in">
+
+  <!-- LEFT SIDE FORM -->
+  <div class="w-1/2 p-16">
+
+    <h2 class="text-4xl font-semibold mb-10">Sign in to Dashboard</h2>
+
+    <form onsubmit="login(event)" class="space-y-6">
+
+      <input type="email" id="email" placeholder="Email"
+        class="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition duration-300" required>
+
+      <input type="password" id="password" placeholder="Password"
+        class="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition duration-300" required>
+
+      <!-- Forgot Password -->
+      <div class="text-right text-sm">
+        <span onclick="openForgot()"
+          class="text-blue-600 cursor-pointer hover:underline">
+          Forgot Password?
+        </span>
+      </div>
+
+      <button
+        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl hover:scale-105 transition duration-300 shadow-xl">
+        Login
+      </button>
+
+    </form>
+
+    <!-- Error -->
+    <p id="errorMsg" class="text-red-500 mt-4 hidden">
+      Account not found.
+      <a href="signup.html" class="text-blue-600 font-semibold">Create your free account</a>
+    </p>
+
+  </div>
+
+  <!-- RIGHT SIDE DESIGN -->
+  <div class="w-1/2 bg-gradient-to-br from-blue-600 to-indigo-600 text-white flex flex-col justify-center items-center p-16 text-center relative">
+
+    <!-- Light Pattern Overlay -->
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+
+    <div class="relative z-10">
+      <h2 class="text-5xl font-bold mb-6">Welcome Back</h2>
+      <p class="opacity-90 text-lg">
+        Join our FleetFlow community and manage logistics like a pro.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= RESET LINK MODAL ================= -->
+<div id="forgotModal"
+  class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <div class="bg-white w-[420px] rounded-2xl p-8 shadow-2xl relative">
+
+    <button onclick="closeForgot()"
+      class="absolute top-4 right-4 text-gray-400 hover:text-black">
+      ✕
+    </button>
+
+    <h2 class="text-xl font-semibold mb-6 text-center">
+      Reset Password
+    </h2>
+
+    <form onsubmit="sendResetLink(event)" class="space-y-4">
+
+      <input type="email" id="resetEmail"
+        placeholder="Enter your registered email"
+        class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+      <button
+        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl hover:scale-105 transition duration-300">
+        Send Reset Link
+      </button>
+
+    </form>
+
+    <p id="resetMsg" class="text-green-600 text-center mt-4 hidden">
+      Reset link has been sent to your registered email.
+    </p>
+
+  </div>
+</div>
+
+<script>
+
+function login(e){
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  let users = JSON.parse(localStorage.getItem("fleetUsers")) || [];
+
+  const validUser = users.find(user =>
+      user.email === email && user.password === password
+  );
+
+  if(validUser){
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "index.html";
+  } else {
+      document.getElementById("errorMsg").classList.remove("hidden");
+  }
+}
+
+function openForgot(){
+  document.getElementById("forgotModal").classList.remove("hidden");
+}
+
+function closeForgot(){
+  document.getElementById("forgotModal").classList.add("hidden");
+}
+
+function sendResetLink(e){
+  e.preventDefault();
+
+  const email = document.getElementById("resetEmail").value;
+  let users = JSON.parse(localStorage.getItem("fleetUsers")) || [];
+
+  const user = users.find(user => user.email === email);
+
+  if(user){
+      document.getElementById("resetMsg").classList.remove("hidden");
+
+      setTimeout(()=>{
+          closeForgot();
+          document.getElementById("resetMsg").classList.add("hidden");
+      },2000);
+
+  } else {
+      alert("Email not found!");
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+license_plate,name,model,max_capacity,odometer,acquisition_cost,status
+VAN1001,Tata,Ace,800,45000,500000,Available
+TRK2001,AshokLeyland,Dost,2000,90000,1200000,Available
+TRK2002,Mahindra,Blazo,1500,60000,950000,In Shop
+VAN1002,Eicher,Pro1049,700,30000,450000,Available
+BIKE3001,Hero,CargoBike,150,12000,90000,Available

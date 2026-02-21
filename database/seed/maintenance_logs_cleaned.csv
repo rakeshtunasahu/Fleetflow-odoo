@@ -1,0 +1,16 @@
+vehicle_id,description,cost,service_date
+TRK2002,Brake Replacement,37785,2024-11-26
+VAN1001,Brake Replacement,14820,2023-11-04
+TRK2002,General Inspection,27358,2023-07-23
+VAN1001,Tire Replacement,6689,2023-11-23
+BIKE3001,Battery Replacement,1460,2024-11-14
+TRK2001,Oil Change,39184,2023-04-13
+VAN1002,Oil Change,12677,2023-04-02
+VAN1001,Brake Replacement,9766,2023-07-29
+TRK2002,Engine Service,23567,2023-11-13
+TRK2002,Oil Change,45122,2023-10-08
+VAN1002,Battery Replacement,9537,2024-02-01
+TRK2001,Oil Change,14307,2023-05-01
+VAN1002,Oil Change,13538,2023-02-14
+TRK2002,Battery Replacement,25620,2024-11-08
+BIKE3001,Brake Replacement,1057,2023-06-06
